@@ -4,6 +4,36 @@ const handleUserRouter = require('./src/router/user')
 const handleBlogRouter = require('./src/router/blog')
 
 
+// 处理路由
+const getPostData = req=>{
+    const promise = new Promise((resolve, reject)=>{
+        if(req.method!=="POST") {
+            resolve({})
+            return
+        }
+        if(req.headers['Content-type'] !== 'application/json') {
+            resolve({})
+            return
+        }
+        let postData = ''
+        req.on('data', chunk=>{
+            postData += chunk
+        })
+        req.on('end', ()=>{
+            if(!postData) {
+                resolve({})
+                return
+            } else {
+                resolve(
+                    JSON.parse(postData)
+                )
+            }
+        })
+    })
+    return promise
+}
+
+
 
 const serverHandle = (req, res) => {
     res.setHeader('Content-type', 'application/json')
@@ -21,24 +51,29 @@ const serverHandle = (req, res) => {
     // res.end(
     //     JSON,stringify(resData)
     // )
-    
-    // 处理blog路由
-    const blogData = handleBlogRouter(req, res)
-    if(blogData) {
-        res.end(
-            JSON.stringify(blogData)
-        )
-        return
-    }
 
-    // 处理user路由
-    const userData = handleUserRouter(req, res)
-    if(userData) {
-        res.end(
-            JSON.stringify(userData)
-        )
-        return
-    }
+    // 处理post data
+    getPostData(req).then(postData=>{
+        req.body = postData
+
+         // 处理blog路由
+        const blogData = handleBlogRouter(req, res)
+        if(blogData) {
+            res.end(
+                JSON.stringify(blogData)
+            )
+            return
+        }
+
+        // 处理user路由
+        const userData = handleUserRouter(req, res)
+        if(userData) {
+            res.end(
+                JSON.stringify(userData)
+            )
+            return
+        }
+    })
 }
 
 module.exports = serverHandle

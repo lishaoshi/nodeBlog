@@ -18,6 +18,7 @@ const getList = (author, keyword) => {
     ]
 }
 
+// 返回博客详情
 const getDetail = (id) => {
     return {
         id: 1,
@@ -28,7 +29,20 @@ const getDetail = (id) => {
     }
 }
 
+// 新建博客路由
+const newBlog = (blogData={}) =>{
+    // blogData是新增博客的内容对象   标题、内容
+    return {
+        id:3,
+        author: '王五',
+        content: '这是博客内容'
+    }
+}
+
+//
+
 module.exports = {
     getList,
-    getDetail
+    getDetail,
+    newBlog
 }
