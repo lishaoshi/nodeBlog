@@ -1,0 +1,17 @@
+{
+  "name": "blog-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "www.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./bin/www.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^1.19.1",
+    "supervisor": "^0.12.0"
+  }
+}
