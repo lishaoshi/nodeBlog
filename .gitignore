@@ -15,4 +15,4 @@ ExportedFiles.xml
 !Model/Portal/PortalTemplates/*/SupportFiles/[Bb]in
 
 # node_modules
-node_modules
+node_modules/
