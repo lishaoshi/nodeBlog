@@ -11,13 +11,13 @@ const getPostData = req=>{
             resolve({})
             return
         }
-        if(req.headers['Content-type'] !== 'application/json') {
+        if(req.headers['content-type'] !== 'application/json') {
             resolve({})
             return
         }
         let postData = ''
         req.on('data', chunk=>{
-            postData += chunk
+            postData += chunk.toString()
         })
         req.on('end', ()=>{
             if(!postData) {
@@ -36,7 +36,7 @@ const getPostData = req=>{
 
 
 const serverHandle = (req, res) => {
-    res.setHeader('Content-type', 'application/json')
+    res.setHeader('content-type', 'application/json')
     const url = req.url
     req.path = url.split('?')[0]
 
@@ -54,8 +54,9 @@ const serverHandle = (req, res) => {
 
     // 处理post data
     getPostData(req).then(postData=>{
+        console.log(req.method)
         req.body = postData
-
+        console.log(postData)
          // 处理blog路由
         const blogData = handleBlogRouter(req, res)
         if(blogData) {

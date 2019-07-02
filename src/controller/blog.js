@@ -39,10 +39,23 @@ const newBlog = (blogData={}) =>{
     }
 }
 
+//更新博客
+const updataBlog = (updata={}) =>{
+    // console.log(Object(updata).keys)
+    return false
+    // if(!Object(updata).keys.length) {
+    //     return false
+    // } else {
+    //     return true
+    // }
+}
+
+
 //
 
 module.exports = {
     getList,
     getDetail,
-    newBlog
+    newBlog,
+    updataBlog
 }
