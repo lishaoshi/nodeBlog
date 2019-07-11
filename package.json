@@ -5,13 +5,18 @@
   "main": "www.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./bin/www.js"
+    "dev": "cross-env NODE_ENV=dev nodemon ./bin/www.js",
+    "build": "cross-env NODE_ENV=production nodemon ./binwww.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "mysql": "^2.17.1",
     "nodemon": "^1.19.1",
     "supervisor": "^0.12.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0"
   }
 }

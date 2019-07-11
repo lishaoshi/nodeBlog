@@ -60,10 +60,11 @@ const serverHandle = (req, res) => {
          // 处理blog路由
         const blogData = handleBlogRouter(req, res)
         if(blogData) {
-            res.end(
-                JSON.stringify(blogData)
-            )
-            return
+            blogData.then(data=>{
+                return res.end(
+                    JSON.stringify(data)
+                )
+            })
         }
 
         // 处理user路由
